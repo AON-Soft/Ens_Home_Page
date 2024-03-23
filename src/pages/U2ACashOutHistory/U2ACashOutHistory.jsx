@@ -7,7 +7,7 @@ const U2ACashOutHistory = () => {
     return (
         <div>
             <Navbar></Navbar>
-            
+            <h2>User to agent cash out history</h2>
         </div>
     );
 };

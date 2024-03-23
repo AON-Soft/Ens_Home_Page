@@ -10,9 +10,7 @@ const A2UBalanceTransfer = () => {
     const { user } = useContext(AuthContext)
     const axiosPublic = useAxiosPublic()
 
-
     const { register, handleSubmit, reset } = useForm();
-
     const onSubmit = async (data) => {
         try {
             const cashIndata = {
@@ -20,14 +18,12 @@ const A2UBalanceTransfer = () => {
                 amount: data.amount
             };
             console.log(cashIndata);
-
             // send Data to server
             const res = await axiosPublic.post('/agent/user/sendPoints', cashIndata);
             console.log("cash in", res.data);
             reset();
         } catch (error) {
             console.error('Error sending data to server:', error);
-            // Handle error gracefully (e.g., show a message to the user)
         }
     };
 
@@ -44,7 +40,7 @@ const A2UBalanceTransfer = () => {
                                 {/* <Image src={"/login.gif"} width={100} height={100} alt='logo' /> */}
                             </div>
                             <h2 className="mt-5 text-black text-center text-2xl font-bold leading-9 tracking-tight">
-                                Sign in to your account
+                               Send Points to Users
                             </h2>
                         </div>
                         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -95,7 +91,7 @@ const A2UBalanceTransfer = () => {
                                             {...register("amount", { required: true })}
                                             id="amount"
                                             name="amount"
-                                            type="text"
+                                            type="number"
                                             autoComplete="amount"
                                             required
                                             className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
