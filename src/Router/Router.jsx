@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import AgentTranHistory from "../pages/AgentTranHistory/AgentTranHistory";
 import U2ACashOutHistory from "../pages/U2ACashOutHistory/U2ACashOutHistory";
 import A2UBalanceTransfer from "../pages/A2UBalanceTransfer/A2UBalanceTransfer";
+import PrivateRouts from "./PrivateRouts";
 
 
 
@@ -14,19 +15,19 @@ const router = createBrowserRouter([
     },
     {
       path: "/home",
-      element: <Home></Home>,
+      element: <PrivateRouts><Home></Home></PrivateRouts>,
     },
     {
       path: "/agentTranHistory",
-      element: <AgentTranHistory></AgentTranHistory>,
+      element: <PrivateRouts><AgentTranHistory></AgentTranHistory></PrivateRouts>,
     },
     {
       path: "/u2aCashOutHistory",
-      element: <U2ACashOutHistory></U2ACashOutHistory>,
+      element: <PrivateRouts><U2ACashOutHistory></U2ACashOutHistory></PrivateRouts>,
     },
     {
       path: "/a2uBalanceTransfer",
-      element: <A2UBalanceTransfer></A2UBalanceTransfer>,
+      element: <PrivateRouts><A2UBalanceTransfer></A2UBalanceTransfer></PrivateRouts>,
     },
     
   ]);

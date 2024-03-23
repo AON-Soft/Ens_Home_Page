@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext(null);
 
@@ -9,7 +10,7 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const axiosPublic = useAxiosPublic()
 
-  
+
 
     useEffect(() => {
         const userData = JSON.parse(localStorage.getItem('user'));
@@ -25,24 +26,11 @@ const AuthProvider = ({ children }) => {
             setUser(response.data.user);
             localStorage.setItem('access-token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
-           
-            // Swal.fire({
-            //     position: "center",
-            //     icon: "success",
-            //     title: "User logged in successfully",
-            //     showConfirmButton: false,
-            //     timer: 1500
-            // });
+
+            toast.success('Successfully Logged In')
             return response.data.user;
         } catch (error) {
-            // Swal.fire({
-            //     position: "center",
-            //     icon: "error",
-            //     title: "Something went wrong",
-            //     showConfirmButton: false,
-            //     timer: 1500
-            // });
-            console.log(error.message);
+           console.log('some wrong');
         }
     };
 

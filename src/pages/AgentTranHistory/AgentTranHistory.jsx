@@ -3,19 +3,39 @@ import Navbar from "../../components/Navbar/Navbar";
 import moment from "moment";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { useCallback, useEffect, useState } from "react";
 
 const AgentTranHistory = () => {
+    const [currentPage, setCurrentPage] = useState(1);
 
     const axiosPublic = useAxiosPublic()
-    const { data: transectionHistory = { shops: [] }, isPending } = useQuery({
+    const { refetch,data: transectionHistory = { shops: [] }, isPending } = useQuery({
         queryKey: ['transectionHistory'],
         queryFn: async () => {
-            const res = await axiosPublic.get('/self/transaction-history');
+            const res = await axiosPublic.get(`${'/self/transaction-history'}/?page=${currentPage}`);
             return res.data;
         }
     });
-    
+
     console.log("agent transection", transectionHistory);
+
+    // handle page change
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
+    // ==========Handle Pagination========
+    const fetchData = useCallback(async () => {
+        await refetch();
+    }, [refetch]);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData, currentPage]);
+
+
+
+
     const transectinColumn = [
         {
             title: "User Name",
@@ -84,8 +104,8 @@ const AgentTranHistory = () => {
                 pagination={{
                     pageSize: transectionHistory?.resultPerPage || 10,
                     total: transectionHistory?.count || 0,
-                    // current: currentPage,
-                    // onChange: handlePageChange,
+                    current: currentPage,
+                    onChange: handlePageChange,
                     // showSizeChanger: true,
                     // showQuickJumper: true,
                 }}
