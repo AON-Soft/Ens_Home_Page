@@ -1,9 +1,13 @@
+import Navbar from "../../components/Navbar/Navbar";
 
 
 const U2ACashOutHistory = () => {
+
+    
     return (
         <div>
-            <h2>User To Agent Cash Out History</h2>
+            <Navbar></Navbar>
+            
         </div>
     );
 };

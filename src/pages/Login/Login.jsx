@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
-
+    const navigate = useNavigate()
 
     const { register, handleSubmit, reset } = useForm();
     const { login } = useContext(AuthContext)
@@ -12,6 +13,7 @@ const Login = () => {
     const onSubmit = async (data) => {
         login(data.email, data.password);
         reset()
+        navigate('/home')
     };
 
 
