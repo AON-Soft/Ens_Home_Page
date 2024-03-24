@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 
@@ -27,10 +26,10 @@ const AuthProvider = ({ children }) => {
             localStorage.setItem('access-token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
 
-            toast.success('Successfully Logged In')
+            toast.success('Successfully logged In!')
             return response.data.user;
         } catch (error) {
-           console.log('some wrong');
+            alert('something went wrong')
         }
     };
 

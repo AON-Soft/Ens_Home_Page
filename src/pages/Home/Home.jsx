@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { Skeleton } from "antd";
 import moment from "moment";
+import { FaDollarSign } from "react-icons/fa";
 
 
 const Home = () => {
@@ -41,20 +42,20 @@ const Home = () => {
                             {myInfo?.avatar?.url ? <img className="w-[200px]" src={myInfo?.avatar?.url} alt="self Image" /> : <img className="w-[200px]" src={"https://i.postimg.cc/gjW7PqPL/user.png"} alt="self Image" />}
                         </div>
                         <div className="mt-8 md:mt-0">
-                            <h2>User Name : {myInfo?.user?.name}</h2>
-                            <h2>User Email : {myInfo?.user?.email}</h2>
-                            <h2>User mobile : {myInfo?.user?.mobile}</h2>
-                            <h2>User Status : {myInfo?.user?.status}</h2>
-                            <h2>User Role : {myInfo?.user?.role}</h2>
+                            <h2>Name : <span className="font-semibold">{myInfo?.user?.name}</span></h2>
+                            <h2>Email : <span className="font-semibold">{myInfo?.user?.email}</span></h2>
+                            <h2>mobile : <span className="font-semibold">{myInfo?.user?.mobile}</span></h2>
+                            <h2>Status : <span className="font-semibold">{myInfo?.user?.status}</span></h2>
+                            <h2>Role : <span className="font-semibold">{myInfo?.user?.role}</span></h2>
                         </div>
                     </div>
                 </div>
                 <div className="md:w-6/12 w-full mt-10 md:mt-0 bg-[#EEE] px-5 py-5 rounded-lg shadow-xl">
                     <h2 className="text-2xl font-semibold text-center mb-5">Account Information</h2>
-                    <div className="px-5">
-                        <h2>Balance : {myInfo?.user?.balance}</h2>
-                        <h2>Bonus Balance : {myInfo?.user?.bonusBalance}</h2>
-                        <h2>Due Balance : {myInfo?.user?.dueBalance}</h2>
+                    <div className="px-5 mt-14">
+                        <h2 className="flex justify-start items-center">Balance :<span><FaDollarSign /></span> {myInfo?.user?.balance}</h2>
+                        <h2 className="flex justify-start items-center">Bonus Balance :<span><FaDollarSign /></span> {myInfo?.user?.bonusBalance}</h2>
+                        <h2 className="flex justify-start items-center">Due Balance :<span><FaDollarSign /></span> {myInfo?.user?.dueBalance}</h2>
                         <h2>Account Created : {formattedDate}</h2>
                     </div>
                 </div>

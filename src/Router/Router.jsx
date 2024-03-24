@@ -5,6 +5,9 @@ import AgentTranHistory from "../pages/AgentTranHistory/AgentTranHistory";
 import U2ACashOutHistory from "../pages/U2ACashOutHistory/U2ACashOutHistory";
 import A2UBalanceTransfer from "../pages/A2UBalanceTransfer/A2UBalanceTransfer";
 import PrivateRouts from "./PrivateRouts";
+import ForgotPassword from "../components/ForgotPassword/ForgotPassword";
+import OtpVerify from "../components/OtpVerify/OtpVerify";
+import ResetPassword from "../components/ResetPassword/ResetPassword";
 
 
 
@@ -12,6 +15,18 @@ const router = createBrowserRouter([
     {
       path: "/",
       element: <Login></Login>,
+    },
+    {
+      path: "/forgotPassword",
+      element: <ForgotPassword></ForgotPassword>,
+    },
+    {
+      path: "/otpVerify",
+      element: <OtpVerify></OtpVerify>,
+    },
+    {
+      path: "/resetPassword",
+      element: <ResetPassword></ResetPassword>,
     },
     {
       path: "/home",

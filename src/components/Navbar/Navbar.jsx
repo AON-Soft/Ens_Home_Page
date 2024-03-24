@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 
 
@@ -16,6 +17,7 @@ const Navbar = () => {
 
 const handleLogout = () => {
     logout()
+    toast.success('Successfully Logged Out!')
 };
 
 
@@ -33,12 +35,12 @@ const handleLogout = () => {
                 <a className="text-xl">
                     <NavLink to={'/home'}>
                         {/* <img className="md:w-[200px] w-[100px] md:h-[100px] lg:h-[120px]" src="https://i.postimg.cc/7YNVY1pr/Food-Thrive-logos-1.jpg" alt="" /> */}
-                        <h2 className="text-[rgb(6,214,160)] text-3xl font-semibold">EnSellers</h2>
+                        <h2 className="text-indigo-600 text-3xl font-semibold">EnSellers</h2>
                     </NavLink>
                 </a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu font-bold text-md menu-horizontal px-1">
+                <ul className="menu font-bold space-x- text-md menu-horizontal px-1">
                     {
                         navlink
                     }
@@ -49,7 +51,7 @@ const handleLogout = () => {
                     <div className="flex">
                         <h2 className="mr-2">{user.name}</h2>
                     </div>
-                    <a onClick={handleLogout} className="btn bg-[rgb(6,214,160)] font-bold text-lg text-white hover:bg-white hover:text-purple-500">Log Out</a>
+                    <a onClick={handleLogout} className="btn bg-indigo-600 font-bold text-lg text-white hover:bg-white hover:text-purple-500">Log Out</a>
 
                 </div> :
                     <div className="navbar-end">
