@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { notification } from "antd";
 
 
 const ResetPassword = () => {
@@ -27,11 +28,12 @@ const ResetPassword = () => {
                 console.log('reset password successfully');
                 reset()
                 navigate('/')
+                notification.success("Success!", "Password reset successfully")
             }
         } catch (error) {
             // Handle errors
             console.error(error);
-            // errorMsg("Error!", "Failed to add admin");
+            notification.error("Error!", "Something went wrong")
         }
 
     };

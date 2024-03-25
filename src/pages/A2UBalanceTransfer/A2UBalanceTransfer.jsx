@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { notification } from "antd";
 
 
 
@@ -22,8 +23,10 @@ const A2UBalanceTransfer = () => {
             const res = await axiosPublic.post('/agent/user/sendPoints', cashIndata);
             console.log("cash in", res.data);
             reset();
+            notification.success("Success!", "Send points successfully")
         } catch (error) {
             console.error('Error sending data to server:', error);
+            notification.error("Success!", "Something went wrong")
         }
     };
 

@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import { notification } from "antd";
 
 
 
@@ -24,14 +25,14 @@ const ForgotPassword = () => {
             console.log(res.data);
 
             if (res.data.success === true) {
-                toast.success('Otp sent to your email')
                 reset()
                 navigate('/otpVerify')
+                notification.success("Success!", "otp send to your email")
             }
         } catch (error) {
             // Handle errors
             console.error(error);
-            // errorMsg("Error!", "Failed to add admin");
+            notification.error("Error!", "Something went wrong")
         }
 
     };
