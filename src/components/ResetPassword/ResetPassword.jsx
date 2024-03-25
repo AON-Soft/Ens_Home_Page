@@ -57,7 +57,7 @@ const ResetPassword = () => {
             }}>
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <div className='flex justify-center'>
-                        <h2 className="text-black text-center text-2xl font-semibold mt-5">Otp Verification</h2>
+                        <h2 className="text-black text-center text-2xl font-semibold mt-5">Reset Password</h2>
                         {/* <div className="flex mr-50 items-center">
                             <img className="w-[100px] mt-10" src="https://i.postimg.cc/bNqqBfVz/image-13-1.png" alt="" />
                         </div> */}
@@ -80,7 +80,7 @@ const ResetPassword = () => {
                                     type="email"
                                     autoComplete="email"
                                     required
-                                    className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    className="block px-3 w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
@@ -97,7 +97,7 @@ const ResetPassword = () => {
                                     type="text"
                                     autoComplete="otp"
                                     required
-                                    className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    className="block px-3 w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
@@ -114,7 +114,7 @@ const ResetPassword = () => {
                                     type="password"
                                     autoComplete="password"
                                     required
-                                    className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    className="block px-3 w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
