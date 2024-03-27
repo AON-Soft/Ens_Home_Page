@@ -10,11 +10,15 @@ import { useQuery } from "@tanstack/react-query";
 
 const A2UBalanceTransfer = () => {
     const { user } = useContext(AuthContext)
+    const [isPending, setIsPending] = useState(false);
+
     const axiosPublic = useAxiosPublic()
     const [receiverEmail, setReceiverEmail] = useState("");
     const { register, handleSubmit, reset } = useForm();
 
+   
     const onSubmit = async (data) => {
+        setIsPending(true);
         try {
             const cashIndata = {
                 receiverEmail: data.receiverEmail,
@@ -28,7 +32,9 @@ const A2UBalanceTransfer = () => {
             notification.success("Success!", "Send points successfully")
         } catch (error) {
             console.error('Error sending data to server:', error);
-            notification.error("Success!", "Something went wrong")
+            notification.error("Error!", "Something went wrong")
+        } finally {
+            setIsPending(false);
         }
     };
 
@@ -36,7 +42,7 @@ const A2UBalanceTransfer = () => {
         setReceiverEmail(event.target.value);
     };
 
-    const { data: receiverInfo = { info: [] }, isPending } = useQuery({
+    const { data: receiverInfo = { info: [] } } = useQuery({
         queryKey: ['receiverInfo'],
         queryFn: async () => {
             const res = await axiosPublic.get(`/user/search?email=${receiverEmail}`);
@@ -46,20 +52,14 @@ const A2UBalanceTransfer = () => {
 
     console.log("receiverInfo", receiverInfo);
 
-    if (isPending) {
-        return (
-            <div className="bg-gray-100 border rounded py-5 px-2">
-                <Skeleton active />
-                <Skeleton active className="mt-4" />
-            </div>
-        );
-    }
-
-
-
-
-
-
+    // if (isPending) {
+    //     return (
+    //         <div className="bg-gray-100 border rounded py-5 px-2">
+    //             <Skeleton active />
+    //             <Skeleton active className="mt-4" />
+    //         </div>
+    //     );
+    // }
 
 
     return (
@@ -137,11 +137,11 @@ const A2UBalanceTransfer = () => {
 
                                 <div>
                                     <button
-                                        // disabled={isPending}
+                                        disabled={isPending}
                                         type="submit"
                                         className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                    > Send Points
-                                        {/* {isPending ? 'Authenticating...' : 'Sign in'} */}
+                                    > 
+                                        {isPending ? 'Sending Points...' : 'Send Points'}
                                     </button>
                                 </div>
                             </form>

@@ -2,21 +2,22 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { notification } from "antd";
+import { useState } from "react";
 
 
 const OtpVerify = () => {
-    const navigate = useNavigate()
-    const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
+    const [isPending, setIsPending] = useState(false);
 
     const { register, handleSubmit, reset } = useForm();
 
-
     const onSubmit = async (data) => {
+        setIsPending(true); 
         const verifyData = {
             email: data.email,
             otp: data.otp
-        }
-        console.log(verifyData);
+        };
 
         try {
             // post data to server
@@ -25,18 +26,18 @@ const OtpVerify = () => {
 
             if (res.data.success === true) {
                 console.log('otp verified');
-                reset()
-                navigate('/resetPassword')
-                notification.success("Success!", "otp verified")
+                reset();
+                navigate('/resetPassword');
+                notification.success("Success!", "otp verified");
             }
         } catch (error) {
             // Handle errors
             console.error(error);
-            notification.error("Error!", "Something went wrong")
+            notification.error("Error!", "Something went wrong");
+        } finally {
+            setIsPending(false); 
         }
-
     };
-
 
     return (
         <div style={{
@@ -59,13 +60,7 @@ const OtpVerify = () => {
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <div className='flex justify-center'>
                         <h2 className="text-black text-center text-2xl font-semibold mt-5">Otp Verification</h2>
-                        {/* <div className="flex mr-50 items-center">
-                            <img className="w-[100px] mt-10" src="https://i.postimg.cc/bNqqBfVz/image-13-1.png" alt="" />
-                        </div> */}
                     </div>
-                    {/* <h2 className="mt-5 text-black text-center text-md font-medium">
-                        Enter your Email address. We'll send you a otp to reset your password
-                    </h2> */}
                 </div>
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -86,7 +81,7 @@ const OtpVerify = () => {
                             </div>
                         </div>
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium leading-6 text-black">
+                            <label htmlFor="otp" className="block text-sm font-medium leading-6 text-black">
                                 Enter Otp Code
                             </label>
                             <div className="mt-2">
@@ -102,13 +97,13 @@ const OtpVerify = () => {
                             </div>
                         </div>
                         <div>
-                            {/* <Link to={'/otpVerify'}> */}
-                                <button
-                                    type="submit"
-                                    className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                >Verify
-                                </button>
-                            {/* </Link> */}
+                            <button
+                                type="submit"
+                                disabled={isPending}
+                                className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                                {isPending ? 'Verifying....' : 'Verify'}
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -116,6 +111,5 @@ const OtpVerify = () => {
         </div>
     );
 };
-
 
 export default OtpVerify;

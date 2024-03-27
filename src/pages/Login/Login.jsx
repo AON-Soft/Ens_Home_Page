@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
@@ -10,19 +10,26 @@ const Login = () => {
     const { login } = useContext(AuthContext)
     const navigate = useNavigate()
     const axiosPublic = useAxiosPublic()
+    const [isPending, setIsPending] = useState(false)
 
 
     const { register, handleSubmit, reset } = useForm();
 
-   
     const onSubmit = async (data) => {
-        await login(data?.email, data?.password);
-        const myInfo = await axiosPublic.get('/me'); // Fetch user info after login
-        if (myInfo?.data?.user?.role === 'agent') { // Check user role after login
-            navigate('/home');
-            reset();
-        } else {
-            navigate('/');
+        setIsPending(true); 
+        try {
+            await login(data?.email, data?.password);
+            const myInfo = await axiosPublic.get('/me');
+            if (myInfo?.data?.user?.role === 'agent') {
+                navigate('/home');
+                reset()
+            } else {
+                navigate('/');
+            }
+        } catch (error) {
+            console.error('Error logging in:', error);
+        } finally {
+            setIsPending(false); 
         }
     };
 
@@ -101,9 +108,10 @@ const Login = () => {
 
                         <div>
                             <button
+                                disabled={isPending}
                                 type="submit"
                                 className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            >Sign In
+                            > {isPending ? 'Authenticating...' : 'Sign in'}
                             </button>
                         </div>
                     </form>
