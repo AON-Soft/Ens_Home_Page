@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { notification } from "antd";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const ResetPassword = () => {
     const navigate = useNavigate();
@@ -28,12 +29,12 @@ const ResetPassword = () => {
                 console.log('reset password successfully');
                 reset();
                 navigate('/');
-                notification.success("Success!", "Password reset successfully");
+                toast.success("Reset Password successfully")
             }
         } catch (error) {
             // Handle errors
             console.error(error);
-            notification.error("Error!", "Something went wrong");
+            toast.error("Something went wrong")
         } finally {
             setIsPending(false);
         }

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { notification } from "antd";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 
 const OtpVerify = () => {
@@ -28,12 +29,12 @@ const OtpVerify = () => {
                 console.log('otp verified');
                 reset();
                 navigate('/resetPassword');
-                notification.success("Success!", "otp verified");
+                toast.success("OTP verified successfully")
             }
         } catch (error) {
             // Handle errors
             console.error(error);
-            notification.error("Error!", "Something went wrong");
+            toast.error("Something went wrong")
         } finally {
             setIsPending(false); 
         }

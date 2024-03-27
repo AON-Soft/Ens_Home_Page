@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { notification } from "antd";
+import toast from "react-hot-toast";
 
 
 
@@ -33,15 +34,15 @@ const AuthProvider = ({ children }) => {
             if (response.data.user.role === 'agent') {
                 localStorage.setItem('access-token', response.data.token);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
-                alert('logged in');
+                toast.success("Agent logged successfully")
                 return response.data.user;
             }
             else {
-                alert('only agent can access this app')
+                toast.error("Only agent can access this app")
             }
             // return response.data.user;
         } catch (error) {
-            notification.error('Something went wrong');
+            toast.error("Something went wrong")
         }
     };
 

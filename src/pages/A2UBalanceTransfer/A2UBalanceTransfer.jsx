@@ -3,8 +3,9 @@ import Navbar from "../../components/Navbar/Navbar";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { Skeleton, notification } from "antd";
+import { notification } from "antd";
 import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 
 
@@ -16,7 +17,7 @@ const A2UBalanceTransfer = () => {
     const [receiverEmail, setReceiverEmail] = useState("");
     const { register, handleSubmit, reset } = useForm();
 
-   
+
     const onSubmit = async (data) => {
         setIsPending(true);
         try {
@@ -28,11 +29,10 @@ const A2UBalanceTransfer = () => {
             // send Data to server
             const res = await axiosPublic.post('/agent/user/sendPoints', cashIndata);
             console.log("cash in", res.data);
-            reset();
-            notification.success("Success!", "Send points successfully")
+            toast.success('Points Send successfully')
         } catch (error) {
             console.error('Error sending data to server:', error);
-            notification.error("Error!", "Something went wrong")
+            toast.error("Something went wrong")
         } finally {
             setIsPending(false);
         }
@@ -140,7 +140,7 @@ const A2UBalanceTransfer = () => {
                                         disabled={isPending}
                                         type="submit"
                                         className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                    > 
+                                    >
                                         {isPending ? 'Sending Points...' : 'Send Points'}
                                     </button>
                                 </div>

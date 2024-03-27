@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { notification } from "antd";
 import { useState } from "react";
+import toast from 'react-hot-toast';
 
 
 const ForgotPassword = () => {
@@ -18,7 +18,7 @@ const ForgotPassword = () => {
         const forgotData = {
             email: data.email
         };
-     
+
         try {
             // post data to server
             const res = await axiosPublic.post('/password/forgot', forgotData);
@@ -27,14 +27,14 @@ const ForgotPassword = () => {
             if (res.data.success === true) {
                 reset()
                 navigate('/otpVerify')
-                notification.success("Success!", "otp send to your email")
+                toast.success("otp send to your email")
             }
         } catch (error) {
             // Handle errors
             console.error(error);
-            notification.error("Error!", "Something went wrong")
+            toast.error("Something went wrong");
         } finally {
-            setIsPending(false); 
+            setIsPending(false);
         }
     };
 
