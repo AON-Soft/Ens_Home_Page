@@ -3,7 +3,6 @@ import Navbar from "../../components/Navbar/Navbar";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { notification } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
@@ -15,7 +14,7 @@ const A2UBalanceTransfer = () => {
 
     const axiosPublic = useAxiosPublic()
     const [receiverEmail, setReceiverEmail] = useState("");
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit } = useForm();
 
 
     const onSubmit = async (data) => {
