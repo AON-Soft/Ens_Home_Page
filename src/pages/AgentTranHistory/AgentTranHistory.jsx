@@ -9,7 +9,7 @@ const AgentTranHistory = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
     const axiosPublic = useAxiosPublic()
-    const { refetch,data: transectionHistory = { shops: [] }, isPending } = useQuery({
+    const { refetch, data: transectionHistory = { shops: [] }, isPending } = useQuery({
         queryKey: ['transectionHistory'],
         queryFn: async () => {
             const res = await axiosPublic.get(`${'/self/transaction-history'}/?page=${currentPage}`);
@@ -67,10 +67,18 @@ const AgentTranHistory = () => {
                 <span>{moment(record.date).format("DD-MM-YY")}</span>
             ),
         },
+        // {
+        //     title: "Flag",
+        //     dataIndex: "flag",
+        //     key: "flag",
+        // },
         {
             title: "Flag",
             dataIndex: "flag",
             key: "flag",
+            render: (flag) => {
+                return flag === "Debit" ? "Cash In" : "Cash Out";
+            }
         },
         {
             title: "Type",

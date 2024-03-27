@@ -9,7 +9,7 @@ const U2ACashOutHistory = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
     const axiosPublic = useAxiosPublic()
-    const { refetch,data: pointsOutHistory = { shops: [] }, isPending } = useQuery({
+    const { refetch, data: pointsOutHistory = { shops: [] }, isPending } = useQuery({
         queryKey: ['pointsOutHistory'],
         queryFn: async () => {
             const res = await axiosPublic.get(`${'/self/transaction-history'}/?page=${currentPage}`);
@@ -19,7 +19,7 @@ const U2ACashOutHistory = () => {
 
     console.log("points out", pointsOutHistory);
 
-        // ==========Handle Pagination========
+    // ==========Handle Pagination========
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
@@ -67,10 +67,18 @@ const U2ACashOutHistory = () => {
                 <span>{moment(record.date).format("DD-MM-YY")}</span>
             ),
         },
+        // {
+        //     title: "Flag",
+        //     dataIndex: "flag",
+        //     key: "flag",
+        // },
         {
             title: "Flag",
             dataIndex: "flag",
             key: "flag",
+            render: (flag) => {
+                return flag === "Debit" ? "Cash In" : "Cash Out";
+            }
         },
         {
             title: "Type",

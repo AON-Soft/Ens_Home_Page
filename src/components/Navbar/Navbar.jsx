@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext)
-    console.log(user);
 
     const navlink = <>
         <li><NavLink to={'/agentTranHistory'}>Agent Transection history</NavLink></li>

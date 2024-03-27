@@ -1,20 +1,29 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useNavigate } from "react-router-dom";
 
 
 
 const Login = () => {
+    const { login } = useContext(AuthContext)
     const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
+
 
     const { register, handleSubmit, reset } = useForm();
-    const { login } = useContext(AuthContext)
 
+   
     const onSubmit = async (data) => {
-        await login(data.email, data.password);
-        reset()
-        navigate('/home')
+        await login(data?.email, data?.password);
+        const myInfo = await axiosPublic.get('/me'); // Fetch user info after login
+        if (myInfo?.data?.user?.role === 'agent') { // Check user role after login
+            navigate('/home');
+            reset();
+        } else {
+            navigate('/');
+        }
     };
 
 

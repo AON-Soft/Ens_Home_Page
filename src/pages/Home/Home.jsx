@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { Skeleton } from "antd";
 import moment from "moment";
-import { FaDollarSign } from "react-icons/fa";
+import coin from "../../../public/coin.png"
 
 
 const Home = () => {
@@ -53,9 +53,9 @@ const Home = () => {
                 <div className="md:w-6/12 w-full mt-10 md:mt-0 bg-[#EEE] px-5 py-5 rounded-lg shadow-xl">
                     <h2 className="text-2xl font-semibold text-center mb-5">Account Information</h2>
                     <div className="px-5 mt-14">
-                        <h2 className="flex justify-start items-center">Balance :<span><FaDollarSign /></span> {myInfo?.user?.balance}</h2>
-                        <h2 className="flex justify-start items-center">Bonus Balance :<span><FaDollarSign /></span> {myInfo?.user?.bonusBalance}</h2>
-                        <h2 className="flex justify-start items-center">Due Balance :<span><FaDollarSign /></span> {myInfo?.user?.dueBalance}</h2>
+                        <h2 className="flex justify-start items-center">Balance : <span><img className="w-5 ml-1 mr-1" src={coin} alt="coin" /></span> {myInfo?.user?.balance}</h2>
+                        <h2 className="flex justify-start items-center">Bonus Balance :<span><img className="w-5 ml-1 mr-1" src={coin} alt="coin" /></span> {myInfo?.user?.bonusBalance}</h2>
+                        <h2 className="flex justify-start items-center">Due Balance :<span><img className="w-5 ml-1 mr-1" src={coin} alt="coin" /></span> {myInfo?.user?.dueBalance}</h2>
                         <h2>Account Created : {formattedDate}</h2>
                     </div>
                 </div>

@@ -3,13 +3,18 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { notification } from "antd";
 
 
+
+
+
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const axiosPublic = useAxiosPublic()
-
+    const axiosPublic = useAxiosPublic();
+    // const navigate = useNavigate()
+    
+   
 
 
     useEffect(() => {
@@ -24,13 +29,19 @@ const AuthProvider = ({ children }) => {
         try {
             const response = await axiosPublic.post('/login', { email, password });
             setUser(response.data.user);
-            localStorage.setItem('access-token', response.data.token);
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-
-            notification.success("Success!", "updated successfully")
-            return response.data.user;
+            console.log("local...", response.data.user);
+            if (response.data.user.role === 'agent') {
+                localStorage.setItem('access-token', response.data.token);
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+                alert('logged in');
+                return response.data.user;
+            }
+            else {
+                alert('only agent can access this app')
+            }
+            // return response.data.user;
         } catch (error) {
-            notification.error('something went wrong')
+            notification.error('Something went wrong');
         }
     };
 
@@ -54,5 +65,9 @@ const AuthProvider = ({ children }) => {
     );
 };
 
-
 export default AuthProvider;
+
+
+
+
+
