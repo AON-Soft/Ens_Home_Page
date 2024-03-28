@@ -1,21 +1,26 @@
 import { useForm } from "react-hook-form";
 import Navbar from "../../components/Navbar/Navbar";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
-
-
 const A2UBalanceTransfer = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
     const [isPending, setIsPending] = useState(false);
-
-    const axiosPublic = useAxiosPublic()
+    const axiosPublic = useAxiosPublic();
     const [receiverEmail, setReceiverEmail] = useState("");
     const { register, handleSubmit } = useForm();
 
+    const { data: receiverInfo = { info: [] }, refetch: refetchReceiverInfo } = useQuery({
+        queryKey: ['receiverInfo', receiverEmail],
+        queryFn: async () => {
+            if (!receiverEmail) return {}; // Return empty object if email is empty
+            const res = await axiosPublic.get(`/user/search?email=${receiverEmail}`);
+            return res.data;
+        }
+    });
 
     const onSubmit = async (data) => {
         setIsPending(true);
@@ -24,14 +29,15 @@ const A2UBalanceTransfer = () => {
                 receiverEmail: data.receiverEmail,
                 amount: data.amount
             };
-            console.log(cashIndata);
             // send Data to server
             const res = await axiosPublic.post('/agent/user/sendPoints', cashIndata);
-            console.log("cash in", res.data);
-            toast.success('Points Send successfully')
+            console.log(res.data);
+            toast.success('Points Sent successfully');
+            // After sending points, refetch receiver info
+            refetchReceiverInfo();
         } catch (error) {
             console.error('Error sending data to server:', error);
-            toast.error("Something went wrong")
+            toast.error(error.message);
         } finally {
             setIsPending(false);
         }
@@ -41,29 +47,14 @@ const A2UBalanceTransfer = () => {
         setReceiverEmail(event.target.value);
     };
 
-    const { data: receiverInfo = { info: [] } } = useQuery({
-        queryKey: ['receiverInfo'],
-        queryFn: async () => {
-            const res = await axiosPublic.get(`/user/search?email=${receiverEmail}`);
-            return res.data;
-        }
-    });
-
-    console.log("receiverInfo", receiverInfo);
-
-    // if (isPending) {
-    //     return (
-    //         <div className="bg-gray-100 border rounded py-5 px-2">
-    //             <Skeleton active />
-    //             <Skeleton active className="mt-4" />
-    //         </div>
-    //     );
-    // }
-
+    useEffect(() => {
+        // Whenever receiverEmail changes, refetch receiver info
+        refetchReceiverInfo();
+    }, [receiverEmail, refetchReceiverInfo]);
 
     return (
         <div>
-            <Navbar></Navbar>
+            <Navbar />
             <div className='md:flex justify-center mt-10 gap-5'>
                 {/* send point div */}
                 <div style={{ minWidth: "30%" }}>
@@ -92,7 +83,7 @@ const A2UBalanceTransfer = () => {
                                             required
                                             defaultValue={user?.email}
                                             readOnly
-                                            className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block px-3 w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -110,7 +101,7 @@ const A2UBalanceTransfer = () => {
                                             type="email"
                                             autoComplete="receiverEmail"
                                             required
-                                            className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block px-3 w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -129,7 +120,7 @@ const A2UBalanceTransfer = () => {
                                             type="number"
                                             autoComplete="amount"
                                             required
-                                            className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            className="block px-3 w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                     </div>
                                 </div>
@@ -175,7 +166,6 @@ const A2UBalanceTransfer = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     );

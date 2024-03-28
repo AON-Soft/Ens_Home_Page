@@ -41,7 +41,7 @@ const AuthProvider = ({ children }) => {
             }
             // return response.data.user;
         } catch (error) {
-            toast.error("Something went wrong")
+            toast.error(error.message)
         }
     };
 
