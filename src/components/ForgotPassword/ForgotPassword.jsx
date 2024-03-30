@@ -48,7 +48,9 @@ const ForgotPassword = () => {
             height: '100vh',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            paddingLeft: '20px',
+            paddingRight: '20px'
         }}>
             <div style={{
                 minWidth: "30%",

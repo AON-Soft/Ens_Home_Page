@@ -12,7 +12,7 @@ const U2ACashOutHistory = () => {
     const { refetch, data: pointsOutHistory = { shops: [] }, isPending } = useQuery({
         queryKey: ['pointsOutHistory'],
         queryFn: async () => {
-            const res = await axiosPublic.get(`${'/self/transaction-history'}/?page=${currentPage}`);
+            const res = await axiosPublic.get(`${'/self/pointout-history'}/?page=${currentPage}`);
             return res.data;
         }
     });
@@ -32,8 +32,6 @@ const U2ACashOutHistory = () => {
     useEffect(() => {
         fetchData();
     }, [fetchData, currentPage]);
-
-
 
 
     const transectinColumn = [
@@ -105,19 +103,23 @@ const U2ACashOutHistory = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <Table
-                className="bg-transparent overflow-x-auto"
-                dataSource={pointsOutHistory?.transactionsHistory || []}
-                columns={transectinColumn}
-                pagination={{
-                    pageSize: pointsOutHistory?.resultPerPage || 10,
-                    total: pointsOutHistory?.count || 0,
-                    current: currentPage,
-                    onChange: handlePageChange,
-                    // showSizeChanger: true,
-                    // showQuickJumper: true,
-                }}
-            />
+            {pointsOutHistory?.transactionsHistory.length > 0 ?
+                <Table
+                    className="bg-transparent overflow-x-auto"
+                    dataSource={pointsOutHistory?.transactionsHistory || []}
+                    columns={transectinColumn}
+                    pagination={{
+                        pageSize: pointsOutHistory?.resultPerPage || 10,
+                        total: pointsOutHistory?.count || 0,
+                        current: currentPage,
+                        onChange: handlePageChange,
+                    }}
+                /> : <div className="md:mt-36 mt-24">
+                    <div className="flex justify-center items-center">
+                        <img className="md:w-[300px] w-[200px]" src="https://i.postimg.cc/65f67Cvg/cart.png" alt="empty card" />
+                    </div>
+                    <h2 className="text-xl text-center font-bold">No data found</h2>
+                </div>}
         </div>
     );
 };

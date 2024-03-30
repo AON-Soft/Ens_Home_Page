@@ -16,7 +16,7 @@ const A2UBalanceTransfer = () => {
     const { data: receiverInfo = { info: [] }, refetch: refetchReceiverInfo } = useQuery({
         queryKey: ['receiverInfo', receiverEmail],
         queryFn: async () => {
-            if (!receiverEmail) return {}; // Return empty object if email is empty
+            if (!receiverEmail) return {}; 
             const res = await axiosPublic.get(`/user/search?email=${receiverEmail}`);
             return res.data;
         }
@@ -36,7 +36,6 @@ const A2UBalanceTransfer = () => {
             // After sending points, refetch receiver info
             refetchReceiverInfo();
         } catch (error) {
-            console.error('Error sending data to server:', error);
             toast.error(error.message);
         } finally {
             setIsPending(false);

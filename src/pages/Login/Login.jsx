@@ -16,7 +16,7 @@ const Login = () => {
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = async (data) => {
-        setIsPending(true); 
+        setIsPending(true);
         try {
             await login(data?.email, data?.password);
             const myInfo = await axiosPublic.get('/me');
@@ -29,7 +29,7 @@ const Login = () => {
         } catch (error) {
             console.error('Error logging in:', error);
         } finally {
-            setIsPending(false); 
+            setIsPending(false);
         }
     };
 
@@ -43,24 +43,22 @@ const Login = () => {
             height: '100vh',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            padding: "20px"
         }}>
             <div style={{
                 minWidth: "30%",
                 background: "rgba(255, 255, 255, 0.3)",
                 borderRadius: "20px",
                 padding: "20px",
-                boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)"
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
             }}>
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <div className='flex justify-center'>
                         <h2 className="text-black text-center text-2xl font-semibold mt-5">EnSellers</h2>
-                        {/* <div className="flex mr-50 items-center">
-                            <img className="w-[100px] mt-10" src="https://i.postimg.cc/bNqqBfVz/image-13-1.png" alt="" />
-                        </div> */}
                     </div>
-                    <h2 className="mt-5 text-black text-center text-2xl font-bold leading-9 tracking-tight">
-                        Sign in to your account
+                    <h2 className="mt-5 text-black text-center text-md font-medium">
+                    Sign in to your account
                     </h2>
                 </div>
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

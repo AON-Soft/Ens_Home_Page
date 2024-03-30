@@ -37,9 +37,10 @@ const Home = () => {
             <div className="md:flex gap-10 md:px-10 px-5 mt-10">
                 <div className="md:w-6/12 w-full bg-[#EEE] px-5 py-5 rounded-lg shadow-xl">
                     <h2 className="text-2xl font-semibold text-center mb-5">Personal Information</h2>
+                    {/* personal info */}
                     <div className="md:flex gap-5 justify-evenly items-center">
                         <div className="flex justify-center items-center">
-                            {myInfo?.avatar?.url ? <img className="w-[200px]" src={myInfo?.avatar?.url} alt="self Image" /> : <img className="w-[200px]" src={"https://i.postimg.cc/gjW7PqPL/user.png"} alt="self Image" />}
+                            {myInfo?.avatar?.url ? <img className="md:w-[200px] w-[150px]" src={myInfo?.avatar?.url} alt="self Image" /> : <img className="md:w-[200px] w-[150px]" src={"https://i.postimg.cc/gjW7PqPL/user.png"} alt="self Image" />}
                         </div>
                         <div className="mt-8 md:mt-0">
                             <h2>Name : <span className="font-semibold">{myInfo?.user?.name}</span></h2>
@@ -50,6 +51,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
+                {/* account info */}
                 <div className="md:w-6/12 w-full mt-10 md:mt-0 bg-[#EEE] px-5 py-5 rounded-lg shadow-xl">
                     <h2 className="text-2xl font-semibold text-center mb-5">Account Information</h2>
                     <div className="px-5 mt-14">

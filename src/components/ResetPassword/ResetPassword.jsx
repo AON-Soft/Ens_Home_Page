@@ -33,7 +33,7 @@ const ResetPassword = () => {
         } catch (error) {
             // Handle errors
             console.error(error);
-            toast.error("Something went wrong")
+            toast.error(error.message)
         } finally {
             setIsPending(false);
         }
@@ -48,7 +48,8 @@ const ResetPassword = () => {
             height: '100vh',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            padding: "20px"
         }}>
             <div style={{
                 minWidth: "30%",

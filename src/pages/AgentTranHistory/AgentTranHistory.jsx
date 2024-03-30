@@ -105,19 +105,27 @@ const AgentTranHistory = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <Table
-                className="bg-transparent overflow-x-auto"
-                dataSource={transectionHistory?.transactionsHistory || []}
-                columns={transectinColumn}
-                pagination={{
-                    pageSize: transectionHistory?.resultPerPage || 10,
-                    total: transectionHistory?.count || 0,
-                    current: currentPage,
-                    onChange: handlePageChange,
-                    // showSizeChanger: true,
-                    // showQuickJumper: true,
-                }}
-            />
+            {transectionHistory?.transactionsHistory.length > 0 ? (
+                <Table
+                    className="bg-transparent overflow-x-auto"
+                    dataSource={transectionHistory?.transactionsHistory || []}
+                    columns={transectinColumn}
+                    pagination={{
+                        pageSize: transectionHistory?.resultPerPage || 10,
+                        total: transectionHistory?.count || 0,
+                        current: currentPage,
+                        onChange: handlePageChange,
+                    }}
+                />
+            ) : (
+                <div className="md:mt-36 mt-24">
+                    <div className="flex justify-center items-center">
+                        <img className="md:w-[300px] w-[200px]" src="https://i.postimg.cc/65f67Cvg/cart.png" alt="empty card" />
+                    </div>
+                    <h2 className="text-xl text-center font-bold">No data found</h2>
+                </div>
+            )}
+
         </div>
     );
 };
