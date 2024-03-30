@@ -17,7 +17,6 @@ const Home = () => {
         }
     });
 
-    console.log("home", myInfo);
 
     if (isPending) {
         return (
