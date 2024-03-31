@@ -32,7 +32,7 @@ const ForgotPassword = () => {
         } catch (error) {
             // Handle errors
             console.error(error);
-            toast.error("Something went wrong");
+            toast.error(error.message);
         } finally {
             setIsPending(false);
         }
