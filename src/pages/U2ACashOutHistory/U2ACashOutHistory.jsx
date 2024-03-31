@@ -116,7 +116,7 @@ const U2ACashOutHistory = () => {
                     }}
                 /> : <div className="md:mt-36 mt-24">
                     <div className="flex justify-center items-center">
-                        <img className="md:w-[300px] w-[200px]" src="https://i.postimg.cc/65f67Cvg/cart.png" alt="empty card" />
+                        <img className="md:w-[300px] w-[200px]" src="https://i.postimg.cc/LsPGmtDs/empty-cart.png" alt="empty card" />
                     </div>
                     <h2 className="text-xl text-center font-bold">No data found</h2>
                 </div>}

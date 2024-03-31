@@ -27,12 +27,12 @@ const ForgotPassword = () => {
             if (res.data.success === true) {
                 reset()
                 navigate('/otpVerify')
-                toast.success("otp send to your email")
+                toast.success(res?.data?.message)
             }
         } catch (error) {
             // Handle errors
             console.error(error);
-            toast.error(error.message);
+            toast.error(error?.response?.data?.message || "An error occurred");
         } finally {
             setIsPending(false);
         }

@@ -32,11 +32,11 @@ const A2UBalanceTransfer = () => {
             // send Data to server
             const res = await axiosPublic.post('/agent/user/sendPoints', cashIndata);
             console.log(res.data);
-            toast.success('Points Sent successfully');
+            toast.success(res?.data?.message);
             // After sending points, refetch receiver info
             refetchReceiverInfo();
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error?.response?.data?.message || "An error occurred");
         } finally {
             setIsPending(false);
         }

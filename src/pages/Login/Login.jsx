@@ -44,7 +44,7 @@ const Login = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            padding: "20px"
+            padding: "20px",
         }}>
             <div style={{
                 minWidth: "30%",
@@ -104,7 +104,7 @@ const Login = () => {
                             </div>
                         </div>
 
-                        <div>
+                        <div className="pb-5">
                             <button
                                 disabled={isPending}
                                 type="submit"

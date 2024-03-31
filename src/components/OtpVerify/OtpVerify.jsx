@@ -13,7 +13,7 @@ const OtpVerify = () => {
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = async (data) => {
-        setIsPending(true); 
+        setIsPending(true);
         const verifyData = {
             email: data.email,
             otp: data.otp
@@ -28,14 +28,14 @@ const OtpVerify = () => {
                 console.log('otp verified');
                 reset();
                 navigate('/resetPassword');
-                toast.success("OTP verified successfully")
+                toast.success(res?.data?.message)
             }
         } catch (error) {
             // Handle errors
             console.error(error);
-            toast.error(error.message)
+            toast.error(error?.response?.data?.message || "An error occurred");
         } finally {
-            setIsPending(false); 
+            setIsPending(false);
         }
     };
 

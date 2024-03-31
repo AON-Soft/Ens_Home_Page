@@ -67,11 +67,6 @@ const AgentTranHistory = () => {
                 <span>{moment(record.date).format("DD-MM-YY")}</span>
             ),
         },
-        // {
-        //     title: "Flag",
-        //     dataIndex: "flag",
-        //     key: "flag",
-        // },
         {
             title: "Flag",
             dataIndex: "flag",
@@ -106,21 +101,21 @@ const AgentTranHistory = () => {
         <div>
             <Navbar></Navbar>
             {transectionHistory?.transactionsHistory.length > 0 ? (
-                <Table
-                    className="bg-transparent overflow-x-auto"
-                    dataSource={transectionHistory?.transactionsHistory || []}
-                    columns={transectinColumn}
-                    pagination={{
-                        pageSize: transectionHistory?.resultPerPage || 10,
-                        total: transectionHistory?.count || 0,
-                        current: currentPage,
-                        onChange: handlePageChange,
-                    }}
-                />
+                 <Table
+                 className="bg-transparent overflow-x-auto"
+                 dataSource={transectionHistory?.transactionsHistory || []}
+                 columns={transectinColumn}
+                 pagination={{
+                     pageSize: transectionHistory?.resultPerPage || 10,
+                     total: transectionHistory?.count || 0,
+                     current: currentPage,
+                     onChange: handlePageChange,
+                 }}
+             />
             ) : (
                 <div className="md:mt-36 mt-24">
                     <div className="flex justify-center items-center">
-                        <img className="md:w-[300px] w-[200px]" src="https://i.postimg.cc/65f67Cvg/cart.png" alt="empty card" />
+                        <img className="md:w-[300px] w-[200px]" src="https://i.postimg.cc/LsPGmtDs/empty-cart.png" alt="empty card" />
                     </div>
                     <h2 className="text-xl text-center font-bold">No data found</h2>
                 </div>

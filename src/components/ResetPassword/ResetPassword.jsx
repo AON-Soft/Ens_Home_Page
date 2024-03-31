@@ -28,12 +28,12 @@ const ResetPassword = () => {
                 console.log('reset password successfully');
                 reset();
                 navigate('/');
-                toast.success("Reset Password successfully")
+                toast.success(res?.data?.message)
             }
         } catch (error) {
             // Handle errors
             console.error(error);
-            toast.error(error.message)
+            toast.error(error?.response?.data?.message || "An error occurred");
         } finally {
             setIsPending(false);
         }
